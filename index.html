@@ -135,7 +135,7 @@
   .time-tag-yt  { color: #f54242; }
 
   input.time-input {
-    width: 62px; background: transparent; border: none; outline: none;
+    width: 90px; background: transparent; border: none; outline: none;
     color: var(--text); font-family: 'Space Mono', monospace; font-size: 12px;
     padding: 0; text-align: center;
   }
@@ -203,7 +203,7 @@
   <div class="controls">
     <div class="time-group">
       <span class="time-tag time-tag-mp4">MP4</span>
-      <input class="time-input" id="mp4-time" placeholder="0:00" title="м:сс или секунды">
+      <input class="time-input" id="mp4-time" placeholder="00:00:00:00" title="чч:мм:сс:мс или секунды">
       <button class="seek-btn" onclick="seekMp4()">→</button>
     </div>
 
@@ -215,7 +215,7 @@
 
     <div class="time-group">
       <span class="time-tag time-tag-yt">YT</span>
-      <input class="time-input" id="yt-time" placeholder="0:00" title="м:сс или секунды">
+      <input class="time-input" id="yt-time" placeholder="00:00:00:00" title="чч:мм:сс:мс или секунды">
       <button class="seek-btn" onclick="seekYt()">→</button>
     </div>
   </div>
@@ -256,8 +256,13 @@
     if (!str) return null;
     if (str.includes(':')) {
       const parts = str.split(':').map(Number);
-      if (parts.length === 2) return parts[0] * 60 + parts[1];
+      // hh:mm:ss:ms (ms = centiseconds like 04 = 40ms, or full ms like 040)
+      if (parts.length === 4) {
+        const ms = parts[3] < 10 ? parts[3] * 100 : parts[3] < 100 ? parts[3] * 10 : parts[3];
+        return parts[0] * 3600 + parts[1] * 60 + parts[2] + ms / 1000;
+      }
       if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+      if (parts.length === 2) return parts[0] * 60 + parts[1];
     }
     const n = parseFloat(str);
     return isNaN(n) ? null : n;
@@ -282,7 +287,7 @@
     container.innerHTML = `
       <div class="vid-slot" id="slot-a">
         <span class="vid-label label-mp4">MP4</span>
-        <video id="mp4-video" src="${escHtml(mp4)}" playsinline></video>
+        <video id="mp4-video" src="${escHtml(mp4)}" controls playsinline></video>
       </div>
       <button class="swap-btn" title="Поменять местами" onclick="swapSlots()">⇄</button>
       <div class="vid-slot" id="slot-b">
