@@ -14,287 +14,159 @@
     --surface: #111118;
     --border: #1e1e2e;
     --accent: #c8f542;
-    --accent2: #42c8f5;
     --text: #e8e8f0;
     --muted: #555570;
     --gap: 10px;
   }
 
-  html, body {
-    height: 100%;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    overflow: hidden;
-  }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; overflow: hidden; }
 
-  /* ── SETUP SCREEN ── */
+  /* ── SETUP ── */
   #setup {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    padding: 24px;
-    gap: 28px;
-    background: var(--bg);
-    animation: fadeIn .4s ease;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 100vh; padding: 24px; gap: 22px; animation: fadeIn .4s ease;
   }
-
-  .logo {
-    font-size: 13px;
-    font-family: 'Space Mono', monospace;
-    letter-spacing: .25em;
-    color: var(--accent);
-    text-transform: uppercase;
-  }
-
-  h1 {
-    font-size: clamp(28px, 8vw, 52px);
-    font-weight: 800;
-    line-height: 1.05;
-    text-align: center;
-  }
-
+  .logo { font-size: 13px; font-family: 'Space Mono', monospace; letter-spacing: .25em; color: var(--accent); text-transform: uppercase; }
+  h1 { font-size: clamp(26px, 7vw, 48px); font-weight: 800; line-height: 1.05; text-align: center; }
   h1 span { color: var(--accent); }
+  .subtitle { font-size: 13px; color: var(--muted); text-align: center; max-width: 320px; line-height: 1.6; }
 
-  .subtitle {
-    font-size: 14px;
-    color: var(--muted);
-    text-align: center;
-    max-width: 320px;
-    line-height: 1.6;
-  }
-
-  .form-block {
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .field-label {
-    font-size: 11px;
-    font-family: 'Space Mono', monospace;
-    letter-spacing: .15em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 2px;
-  }
-
-  .field-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .tag {
-    font-size: 10px;
-    font-family: 'Space Mono', monospace;
-    padding: 2px 6px;
-    border-radius: 3px;
-    align-self: flex-start;
-  }
+  .form-block { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 12px; }
+  .field-label { font-size: 11px; font-family: 'Space Mono', monospace; letter-spacing: .15em; color: var(--muted); text-transform: uppercase; margin-bottom: 2px; }
+  .field-wrap { display: flex; flex-direction: column; gap: 4px; }
+  .tag { font-size: 10px; font-family: 'Space Mono', monospace; padding: 2px 6px; border-radius: 3px; align-self: flex-start; }
   .tag-mp4 { background: #c8f54218; color: var(--accent); border: 1px solid #c8f54240; }
   .tag-yt  { background: #f5424218; color: #f54242; border: 1px solid #f5424240; }
 
   input[type="text"] {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    padding: 12px 14px;
-    border-radius: 8px;
-    outline: none;
-    transition: border-color .2s;
+    width: 100%; background: var(--surface); border: 1px solid var(--border);
+    color: var(--text); font-family: 'Space Mono', monospace; font-size: 12px;
+    padding: 12px 14px; border-radius: 8px; outline: none; transition: border-color .2s;
   }
   input[type="text"]:focus { border-color: var(--accent); }
   input[type="text"]::placeholder { color: var(--muted); }
 
-  /* layout toggle */
-  .layout-toggle {
-    display: flex;
-    gap: 8px;
-  }
-
+  .layout-toggle { display: flex; gap: 8px; }
   .layout-btn {
-    flex: 1;
-    padding: 10px 8px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    cursor: pointer;
-    transition: all .2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
+    flex: 1; padding: 10px 8px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--muted); font-family: 'Space Mono', monospace;
+    font-size: 11px; cursor: pointer; transition: all .2s; display: flex; align-items: center; justify-content: center; gap: 6px;
   }
-  .layout-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: #c8f54210;
-  }
+  .layout-btn.active { border-color: var(--accent); color: var(--accent); background: #c8f54210; }
 
   .go-btn {
-    width: 100%;
-    padding: 15px;
-    border-radius: 10px;
-    border: none;
-    background: var(--accent);
-    color: #0a0a0f;
-    font-family: 'Syne', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: .05em;
-    cursor: pointer;
-    transition: transform .15s, opacity .15s;
-    margin-top: 4px;
+    width: 100%; padding: 15px; border-radius: 10px; border: none;
+    background: var(--accent); color: #0a0a0f; font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700; letter-spacing: .05em; cursor: pointer;
+    transition: transform .15s, opacity .15s; margin-top: 4px;
   }
   .go-btn:active { transform: scale(.97); opacity: .85; }
+  .error-msg { font-size: 12px; font-family: 'Space Mono', monospace; color: #f54242; text-align: center; min-height: 16px; }
 
-  .error-msg {
-    font-size: 12px;
-    font-family: 'Space Mono', monospace;
-    color: #f54242;
-    text-align: center;
-    min-height: 16px;
-  }
-
-  /* ── PLAYER SCREEN ── */
-  #player {
-    display: none;
-    width: 100vw;
-    height: 100vh;
-    flex-direction: column;
-    background: var(--bg);
-  }
+  /* ── PLAYER ── */
+  #player { display: none; width: 100vw; height: 100vh; flex-direction: column; background: var(--bg); }
   #player.active { display: flex; }
 
-  /* top bar */
   .topbar {
-    height: 40px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 12px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    height: 40px; flex-shrink: 0; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 12px;
+    background: var(--surface); border-bottom: 1px solid var(--border);
   }
-  .topbar-logo {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .2em;
-    color: var(--accent);
-  }
+  .topbar-logo { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .2em; color: var(--accent); }
   .back-btn {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    padding: 4px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: border-color .2s, color .2s;
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    font-family: 'Space Mono', monospace; font-size: 10px; padding: 4px 10px;
+    border-radius: 5px; cursor: pointer; transition: border-color .2s, color .2s;
   }
   .back-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* video area */
   #videos {
-    flex: 1;
-    display: flex;
-    padding: var(--gap);
-    gap: var(--gap);
-    overflow: hidden;
+    flex: 1; display: flex; padding: var(--gap); gap: var(--gap); overflow: hidden; min-height: 0;
   }
-
-  /* horizontal = side by side */
   #videos.layout-h { flex-direction: row; }
-  /* vertical = top/bottom */
   #videos.layout-v { flex-direction: column; }
 
   .vid-slot {
-    flex: 1;
-    position: relative;
-    background: #000;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid var(--border);
+    flex: 1; position: relative; background: #000;
+    border-radius: 10px; overflow: hidden; border: 1px solid var(--border); min-height: 0;
   }
-
   .vid-label {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    z-index: 10;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: .1em;
-    padding: 3px 7px;
-    border-radius: 4px;
-    pointer-events: none;
+    position: absolute; top: 8px; left: 8px; z-index: 10;
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .1em;
+    padding: 3px 7px; border-radius: 4px; pointer-events: none;
   }
   .label-mp4 { background: #c8f54230; color: var(--accent); border: 1px solid #c8f54250; }
   .label-yt  { background: #f5424230; color: #f54242; border: 1px solid #f5424250; }
 
-  .vid-slot video,
-  .vid-slot iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
+  .vid-slot video, .vid-slot iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%; border: none;
   }
 
-  /* swap button */
   .swap-btn {
-    position: absolute;
-    /* sits between the two panels */
-    z-index: 20;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    transition: color .2s, border-color .2s;
-    flex-shrink: 0;
-    align-self: center;
+    z-index: 20; background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+    width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; font-size: 14px;
+    transition: color .2s, border-color .2s; flex-shrink: 0; align-self: center;
   }
   .swap-btn:hover { color: var(--accent); border-color: var(--accent); }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
+  /* ── CONTROLS BAR ── */
+  .controls {
+    flex-shrink: 0; height: 52px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: var(--surface); border-top: 1px solid var(--border); padding: 0 14px;
   }
 
-  /* mobile adjustments */
-  @media (max-width: 500px) {
+  .play-btn {
+    width: 38px; height: 38px; border-radius: 50%; border: none;
+    background: var(--accent); color: #0a0a0f;
+    font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: transform .15s, opacity .15s; flex-shrink: 0;
+  }
+  .play-btn:active { transform: scale(.93); opacity: .8; }
+
+  .time-group {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 4px 8px;
+  }
+  .time-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .08em; padding: 2px 5px; border-radius: 3px; flex-shrink: 0; }
+  .time-tag-mp4 { color: var(--accent); }
+  .time-tag-yt  { color: #f54242; }
+
+  input.time-input {
+    width: 62px; background: transparent; border: none; outline: none;
+    color: var(--text); font-family: 'Space Mono', monospace; font-size: 12px;
+    padding: 0; text-align: center;
+  }
+  input.time-input::placeholder { color: var(--muted); }
+
+  .seek-btn {
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    font-family: 'Space Mono', monospace; font-size: 9px;
+    padding: 3px 7px; border-radius: 5px; cursor: pointer;
+    transition: border-color .2s, color .2s; white-space: nowrap;
+  }
+  .seek-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 540px) {
+    .controls { gap: 6px; padding: 0 8px; height: 56px; }
+    input.time-input { width: 52px; }
     #videos { --gap: 6px; }
-    .topbar { height: 36px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ── SETUP ── -->
+<!-- SETUP -->
 <div id="setup">
   <div class="logo">DualView</div>
   <h1>Два видео.<br><span>Один экран.</span></h1>
-  <p class="subtitle">MP4-ссылка + YouTube одновременно — реакция и источник рядом</p>
+  <p class="subtitle">MP4-ссылка + YouTube одновременно</p>
 
   <div class="form-block">
     <div class="field-wrap">
@@ -302,44 +174,63 @@
       <span class="tag tag-mp4">MP4 / прямая ссылка</span>
       <input type="text" id="mp4url" placeholder="https://video.org/mojqs.mp4" autocomplete="off" autocorrect="off" spellcheck="false">
     </div>
-
     <div class="field-wrap">
       <span class="field-label">Второе видео</span>
       <span class="tag tag-yt">YouTube</span>
       <input type="text" id="yturl" placeholder="https://youtube.com/watch?v=... или ID" autocomplete="off" autocorrect="off" spellcheck="false">
     </div>
-
     <div class="field-wrap">
       <span class="field-label">Расположение</span>
       <div class="layout-toggle">
-        <button class="layout-btn active" data-layout="h" onclick="selectLayout(this)">
-          <span>◫◫</span> Рядом
-        </button>
-        <button class="layout-btn" data-layout="v" onclick="selectLayout(this)">
-          <span>⬒</span> Сверху/снизу
-        </button>
+        <button class="layout-btn active" data-layout="h" onclick="selectLayout(this)">◫◫ Рядом</button>
+        <button class="layout-btn" data-layout="v" onclick="selectLayout(this)">⬒ Сверху/снизу</button>
       </div>
     </div>
-
     <div class="error-msg" id="err"></div>
     <button class="go-btn" onclick="launch()">Запустить →</button>
   </div>
 </div>
 
-<!-- ── PLAYER ── -->
+<!-- PLAYER -->
 <div id="player">
   <div class="topbar">
     <span class="topbar-logo">DUALVIEW</span>
     <button class="back-btn" onclick="goBack()">← Назад</button>
   </div>
 
-  <div id="videos" class="layout-h">
-    <!-- filled by JS -->
+  <div id="videos" class="layout-h"></div>
+
+  <div class="controls">
+    <div class="time-group">
+      <span class="time-tag time-tag-mp4">MP4</span>
+      <input class="time-input" id="mp4-time" placeholder="0:00" title="м:сс или секунды">
+      <button class="seek-btn" onclick="seekMp4()">→</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <button class="play-btn" id="play-btn" onclick="togglePlay()" title="Пауза / Воспроизведение (пробел)">▶</button>
+
+    <div class="divider"></div>
+
+    <div class="time-group">
+      <span class="time-tag time-tag-yt">YT</span>
+      <input class="time-input" id="yt-time" placeholder="0:00" title="м:сс или секунды">
+      <button class="seek-btn" onclick="seekYt()">→</button>
+    </div>
   </div>
 </div>
 
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
   let chosenLayout = 'h';
+  let ytPlayer = null;
+  let mp4El = null;
+  let isPlaying = false;
+
+  function onYouTubeIframeAPIReady() {
+    // will be called by YT script; player created in launch()
+  }
 
   function selectLayout(btn) {
     document.querySelectorAll('.layout-btn').forEach(b => b.classList.remove('active'));
@@ -349,17 +240,27 @@
 
   function extractYtId(input) {
     input = input.trim();
-    // already an ID (11 chars, no slash)
     if (/^[A-Za-z0-9_-]{11}$/.test(input)) return input;
     try {
       const url = new URL(input);
       if (url.hostname.includes('youtu.be')) return url.pathname.slice(1);
-      if (url.searchParams.get('v'))         return url.searchParams.get('v');
-      // shorts
+      if (url.searchParams.get('v')) return url.searchParams.get('v');
       const m = url.pathname.match(/\/(shorts|embed|v)\/([A-Za-z0-9_-]{11})/);
       if (m) return m[2];
     } catch {}
     return null;
+  }
+
+  function parseTime(str) {
+    str = (str || '').trim();
+    if (!str) return null;
+    if (str.includes(':')) {
+      const parts = str.split(':').map(Number);
+      if (parts.length === 2) return parts[0] * 60 + parts[1];
+      if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    }
+    const n = parseFloat(str);
+    return isNaN(n) ? null : n;
   }
 
   function launch() {
@@ -369,46 +270,96 @@
 
     if (!mp4) { err.textContent = 'Введите MP4-ссылку'; return; }
     if (!yt)  { err.textContent = 'Введите YouTube-ссылку или ID'; return; }
-
     const ytId = extractYtId(yt);
     if (!ytId) { err.textContent = 'Не удалось распознать YouTube ID'; return; }
 
     err.textContent = '';
+    isPlaying = false;
+    updatePlayBtn();
 
     const container = document.getElementById('videos');
     container.className = 'layout-' + chosenLayout;
-
-    // build slots
     container.innerHTML = `
       <div class="vid-slot" id="slot-a">
         <span class="vid-label label-mp4">MP4</span>
-        <video src="${escHtml(mp4)}" controls playsinline></video>
+        <video id="mp4-video" src="${escHtml(mp4)}" playsinline></video>
       </div>
       <button class="swap-btn" title="Поменять местами" onclick="swapSlots()">⇄</button>
       <div class="vid-slot" id="slot-b">
         <span class="vid-label label-yt">YOUTUBE</span>
-        <iframe src="https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
+        <div id="yt-player-div" style="position:absolute;inset:0;width:100%;height:100%;"></div>
       </div>
     `;
+
+    mp4El = document.getElementById('mp4-video');
+
+    // Destroy previous YT player if exists
+    if (ytPlayer) { try { ytPlayer.destroy(); } catch(e){} ytPlayer = null; }
+
+    // Create new YT player via IFrame API
+    ytPlayer = new YT.Player('yt-player-div', {
+      videoId: ytId,
+      playerVars: { rel: 0, modestbranding: 1, enablejsapi: 1 },
+      width: '100%',
+      height: '100%',
+      events: {
+        onReady: (e) => {
+          ytPlayer = e.target;
+          // Make iframe fill slot
+          const iframe = document.querySelector('#slot-b iframe');
+          if (iframe) {
+            iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+          }
+        }
+      }
+    });
 
     document.getElementById('setup').style.display = 'none';
     document.getElementById('player').classList.add('active');
   }
 
+  function togglePlay() {
+    isPlaying = !isPlaying;
+    if (mp4El) isPlaying ? mp4El.play() : mp4El.pause();
+    if (ytPlayer && ytPlayer.playVideo) isPlaying ? ytPlayer.playVideo() : ytPlayer.pauseVideo();
+    updatePlayBtn();
+  }
+
+  function updatePlayBtn() {
+    const btn = document.getElementById('play-btn');
+    if (btn) btn.textContent = isPlaying ? '⏸' : '▶';
+  }
+
+  function seekMp4() {
+    const t = parseTime(document.getElementById('mp4-time').value);
+    if (t !== null && mp4El) mp4El.currentTime = t;
+  }
+
+  function seekYt() {
+    const t = parseTime(document.getElementById('yt-time').value);
+    if (t !== null && ytPlayer && ytPlayer.seekTo) ytPlayer.seekTo(t, true);
+  }
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT') {
+      if (e.key === 'Enter') {
+        if (e.target.id === 'mp4-time') seekMp4();
+        if (e.target.id === 'yt-time')  seekYt();
+      }
+      return;
+    }
+    if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+  });
+
   function swapSlots() {
     const container = document.getElementById('videos');
     const a = document.getElementById('slot-a');
     const b = document.getElementById('slot-b');
-    // swap DOM positions (swap btn stays in between)
     const swapBtn = container.querySelector('.swap-btn');
     container.insertBefore(b, swapBtn);
     container.appendChild(a);
-    // re-id
-    b.id = 'slot-a';
-    a.id = 'slot-b';
-    // swap labels
+    b.id = 'slot-a'; a.id = 'slot-b';
     const labelA = b.querySelector('.vid-label');
     const labelB = a.querySelector('.vid-label');
     [labelA.className, labelB.className] = [labelB.className, labelA.className];
@@ -416,9 +367,14 @@
   }
 
   function goBack() {
+    if (ytPlayer) { try { ytPlayer.destroy(); } catch(e){} ytPlayer = null; }
+    if (mp4El) { mp4El.pause(); mp4El = null; }
+    isPlaying = false;
     document.getElementById('player').classList.remove('active');
     document.getElementById('setup').style.display = 'flex';
     document.getElementById('videos').innerHTML = '';
+    document.getElementById('mp4-time').value = '';
+    document.getElementById('yt-time').value = '';
   }
 
   function escHtml(s) {
