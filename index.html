@@ -112,15 +112,15 @@
 
   /* ── CONTROLS BAR ── */
   .controls {
-    flex-shrink: 0; height: 52px;
+    flex-shrink: 0; height: 56px;
     display: flex; align-items: center; justify-content: center; gap: 10px;
     background: var(--surface); border-top: 1px solid var(--border); padding: 0 14px;
   }
 
   .play-btn {
-    width: 38px; height: 38px; border-radius: 50%; border: none;
+    width: 44px; height: 44px; border-radius: 50%; border: none;
     background: var(--accent); color: #0a0a0f;
-    font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center;
     transition: transform .15s, opacity .15s; flex-shrink: 0;
   }
   .play-btn:active { transform: scale(.93); opacity: .8; }
@@ -128,7 +128,7 @@
   .time-group {
     display: flex; align-items: center; gap: 6px;
     background: var(--bg); border: 1px solid var(--border);
-    border-radius: 8px; padding: 4px 8px;
+    border-radius: 8px; padding: 5px 10px;
   }
   .time-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .08em; padding: 2px 5px; border-radius: 3px; flex-shrink: 0; }
   .time-tag-mp4 { color: var(--accent); }
@@ -149,14 +149,36 @@
   }
   .seek-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-  .divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+  .divider { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-  @media (max-width: 540px) {
-    .controls { gap: 6px; padding: 0 8px; height: 56px; }
-    input.time-input { width: 52px; }
-    #videos { --gap: 6px; }
+  /* ── MOBILE: горизонтальный телефон ── */
+  @media (max-height: 500px) {
+    .topbar { height: 34px; }
+    .topbar-logo { font-size: 10px; }
+
+    .controls { height: 68px; gap: 8px; padding: 0 12px; }
+
+    .play-btn { width: 52px; height: 52px; font-size: 22px; }
+
+    .time-group { padding: 8px 12px; border-radius: 12px; gap: 8px; }
+    .time-tag { font-size: 11px; }
+
+    input.time-input { width: 100px; font-size: 15px; }
+
+    .seek-btn {
+      font-size: 13px; padding: 8px 12px;
+      border-radius: 8px; min-width: 40px; text-align: center;
+    }
+
+    #videos { --gap: 5px; padding: 5px; }
+  }
+
+  /* очень узкий — скрываем лейблы MP4/YT в контролах */
+  @media (max-height: 500px) and (max-width: 480px) {
+    .time-tag { display: none; }
+    input.time-input { width: 80px; }
   }
 </style>
 </head>
