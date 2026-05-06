@@ -19,12 +19,21 @@
     --gap: 10px;
   }
 
-  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; overflow: hidden; }
+  html { height: 100%; }
+  body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; overflow: hidden; }
 
   /* ── SETUP ── */
   #setup {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    height: 100vh; padding: 24px; gap: 22px; animation: fadeIn .4s ease;
+    min-height: 100vh; padding: 24px; gap: 22px; animation: fadeIn .4s ease;
+    overflow-y: auto; -webkit-overflow-scrolling: touch; box-sizing: border-box;
+  }
+  /* горизонтальная ориентация — компактнее */
+  @media (max-height: 500px) {
+    #setup { gap: 10px; padding: 16px 24px; justify-content: flex-start; }
+    #setup .logo { display: none; }
+    #setup h1 { font-size: 22px; }
+    #setup .subtitle { display: none; }
   }
   .logo { font-size: 13px; font-family: 'Space Mono', monospace; letter-spacing: .25em; color: var(--accent); text-transform: uppercase; }
   h1 { font-size: clamp(26px, 7vw, 48px); font-weight: 800; line-height: 1.05; text-align: center; }
@@ -290,6 +299,14 @@
     return isNaN(n) ? null : n;
   }
 
+  function waitForYT(cb) {
+    if (typeof YT !== 'undefined' && YT.Player) {
+      cb();
+    } else {
+      setTimeout(() => waitForYT(cb), 100);
+    }
+  }  
+
   function launch() {
     const mp4 = document.getElementById('mp4url').value.trim();
     const yt  = document.getElementById('yturl').value.trim();
@@ -324,22 +341,23 @@
     if (ytPlayer) { try { ytPlayer.destroy(); } catch(e){} ytPlayer = null; }
 
     // Create new YT player via IFrame API
-    ytPlayer = new YT.Player('yt-player-div', {
-      videoId: ytId,
-      playerVars: { rel: 0, modestbranding: 1, enablejsapi: 1 },
-      width: '100%',
-      height: '100%',
-      events: {
-        onReady: (e) => {
-          ytPlayer = e.target;
-          // Make iframe fill slot
-          const iframe = document.querySelector('#slot-b iframe');
-          if (iframe) {
-            iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+    waitForYT(() => {
+      ytPlayer = new YT.Player('yt-player-div', {
+        videoId: ytId,
+        playerVars: { rel: 0, modestbranding: 1, enablejsapi: 1 },
+        width: '100%',
+        height: '100%',
+        events: {
+          onReady: (e) => {
+            ytPlayer = e.target;
+            const iframe = document.querySelector('#slot-b iframe');
+            if (iframe) {
+              iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+            }
           }
         }
-      }
-    });
+      });
+    }); // <- закрывает waitForYT
 
     document.getElementById('setup').style.display = 'none';
     document.getElementById('player').classList.add('active');
